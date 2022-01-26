@@ -39,6 +39,7 @@ const server = http.createServer((req, res) => {
         }
 })
 
+// our server is listening on port 3001 we can change it
 server.listen(3001,()=>{
     console.log('listening on port 3001');
 })
