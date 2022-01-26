@@ -7,15 +7,17 @@ const server = http.createServer((req, res) => {
             const [url, query] = req.url.split("?");
             if(url === '/users'){
                 if(req.method === 'GET'){
+                    const q = new URLSearchParams(`?${query}`);
+                    const page = q.get('page') ?? 1;
                     res.writeHead(200, {'Content-Type' : 'application/json'});
-                    res.end(JSON.stringify(getAllUsers()))
+                    res.end(JSON.stringify(getAllUsers(Number(page))));
                 }
                 else if(req.method === 'POST'){
                     console.log(url, query);
-                    const [name, value] = query.split("=");
-                    console.log(name, value);
-                    addUser(value);
-                    console.log(value, "is added to the database");
+                    const q = new URLSearchParams(`?${query}`);
+                    const name = q.get('name');
+                    addUser(name);
+                    console.log(q.get("name"), "is added to the database");
                     res.writeHead(200, {'Content-Type' : 'application/json'});
                     res.end(JSON.stringify(getAllUsers()));
                 }
@@ -38,5 +40,5 @@ const server = http.createServer((req, res) => {
 })
 
 server.listen(3001,()=>{
-    console.log('listening on prt 3001');
+    console.log('listening on port 3001');
 })

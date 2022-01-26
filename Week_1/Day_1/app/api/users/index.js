@@ -1,7 +1,10 @@
-const users = ["Aman","Jaswant","Nrupul","Albert"];
+const users = ["Aman","Jaswant","Nrupul","Albert","Anoop","Amit"];
 
-function getAllUsers(){
-    return users;
+function getAllUsers(page=1){
+    const start = (page-1)*3;
+    const end = start + 3;
+    return users.slice(start,end);
+    // return users;
 }
 
 function getUser(index){
