@@ -11,7 +11,14 @@ function getUser(index){
     else 
         return null;
 }
+
+function addUser(name){
+    users.push(name);
+    return users;
+}
+
 module.exports = {
     getAllUsers,
-    getUser
+    getUser,
+    addUser
 }

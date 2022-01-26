@@ -1,23 +1,27 @@
 const http = require('http');
-const { getAllUsers, getUser } = require('./app/api/users/');
+const { getAllUsers, getUser, addUser } = require('./app/api/users/');
 
 const server = http.createServer((req, res) => {
         try{
             console.log(req.method ,req.url)
-            
-            if(req.url === '/users'){
+            const [url, query] = req.url.split("?");
+            if(url === '/users'){
                 if(req.method === 'GET'){
                     res.writeHead(200, {'Content-Type' : 'application/json'});
                     res.end(JSON.stringify(getAllUsers()))
                 }
                 else if(req.method === 'POST'){
                     console.log(url, query);
+                    const [name, value] = query.split("=");
+                    console.log(name, value);
+                    addUser(value);
+                    console.log(value, "is added to the database");
                     res.writeHead(200, {'Content-Type' : 'application/json'});
                     res.end(JSON.stringify(getAllUsers()));
                 }
             }
-            else if(req.url.startsWith('/user/')){
-                const index = Number(req.url.split('/')[2]);
+            else if(url.startsWith('/users/')){
+                const index = Number(url.split('/')[2]);
                 req.writeHead(200, {'Content-Type' : 'application/json'});
                 res.end(JSON.stringify(getUser(index)))
             }
