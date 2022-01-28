@@ -23,9 +23,9 @@ const server = http.createServer((req, res) => {
                 }
             }
             else if(url.startsWith('/users/')){
-                const index = Number(url.split('/')[2]);
+                const index = Number(req.url.split('/')[2]);
                 req.writeHead(200, {'Content-Type' : 'application/json'});
-                res.end(JSON.stringify(getUser(index)))
+                res.end(JSON.stringify(getUser(index)));
             }
             else{
                 throw new Error('Din not understand your query')
@@ -39,7 +39,7 @@ const server = http.createServer((req, res) => {
         }
 })
 
-// our server is listening on port 3001 we can change it
+// our server is listening on port 3001 we can change
 server.listen(3001,()=>{
     console.log('listening on port 3001');
 })
