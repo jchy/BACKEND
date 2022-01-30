@@ -1,0 +1,14 @@
+{
+  "name": "assignment_5410",
+  "version": "1.0.0",
+  "description": "",
+  "main": "readFil.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
